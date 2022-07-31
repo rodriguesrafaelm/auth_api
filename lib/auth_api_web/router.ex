@@ -7,6 +7,8 @@ defmodule AuthApiWeb.Router do
 
   scope "/api", AuthApiWeb do
     pipe_through :api
+
+    post "/users", UserController, :register
   end
 
   # Enables LiveDashboard only for development

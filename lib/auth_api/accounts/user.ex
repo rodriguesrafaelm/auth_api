@@ -18,4 +18,20 @@ defmodule AuthApi.Accounts.User do
     |> validate_required([:first_name, :last_name, :email, :password])
     |> unique_constraint(:email)
   end
+
+  def registration_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:first_name, :last_name, :email, :password])
+    |> validate_required([:first_name, :last_name, :email, :password])
+    |> unique_constraint(:email)
+    |> encrypt_and_put_password()
+  end
+
+  defp encrypt_and_put_password(user) do
+    with password <- fetch_field(user, :password) do
+      encrypted_password = Pbkdf2.hash_pwd_salt(password)
+      put_change(user, :password, encrypted_password)
+    end
+  end
+
 end
