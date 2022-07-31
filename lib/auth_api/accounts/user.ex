@@ -34,4 +34,7 @@ defmodule AuthApi.Accounts.User do
     end
   end
 
+
+
+
 end
