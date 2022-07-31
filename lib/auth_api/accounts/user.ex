@@ -28,7 +28,7 @@ defmodule AuthApi.Accounts.User do
   end
 
   defp encrypt_and_put_password(user) do
-    with password <- fetch_field(user, :password) do
+    with password <- fetch_field!(user, :password) do
       encrypted_password = Pbkdf2.hash_pwd_salt(password)
       put_change(user, :password, encrypted_password)
     end
