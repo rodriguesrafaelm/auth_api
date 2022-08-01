@@ -52,5 +52,5 @@ config :phoenix, :json_library, Jason
 import_config "#{config_env()}.exs"
 
 config :auth_api, AuthApi.Guardian,
-  issuer:"auth_api",
+  issuer: "auth_api",
   secret_key: "temporarysecretkey"

@@ -5,11 +5,27 @@ defmodule AuthApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug AuthApi.Guardian.AuthPipeline
+  end
+
   scope "/api", AuthApiWeb do
     pipe_through :api
 
     post "/users", UserController, :register
+    post "/sessions/new", SessionController, :new
+
   end
+
+  scope "/api", AuthApiWeb do
+    pipe_through [:api, :auth]
+
+    post "/session/refresh", SessionController, :refresh
+    post "/session/delete", SessionController, :delete
+
+
+  end
+
 
   # Enables LiveDashboard only for development
   #
