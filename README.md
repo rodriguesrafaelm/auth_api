@@ -9,7 +9,7 @@ Phoenix, Ecto, Guardian e Pbkdf2(hash das senhas).
 
 ### Setup:
 
-#### Portugues:
+#### Português:
 
   * Instalar deps usando `mix deps.get`
   * Ajustas as credencias de acesso ao banco de dados no arquivo "config/dev.exs" linha 4.
