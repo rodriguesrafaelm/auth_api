@@ -10,7 +10,7 @@ defmodule AuthApiWeb.SessionController do
     case Accounts.authenticate_user(email, password) do
       {:ok, user} ->
         {:ok, access_token, _claims} =
-          Guardian.encode_and_sign(user, %{}, token_type: "access", ttl: {15, :min})
+          Guardian.encode_and_sign(user, %{}, token_type: "access", ttl: {15, :minutes})
 
 
         {:ok, refresh_token, _claims} =

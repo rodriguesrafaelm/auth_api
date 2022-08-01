@@ -13,7 +13,7 @@ defmodule AuthApiWeb.Router do
     pipe_through :api
 
     post "/users", UserController, :register
-    post "/sessions/new", SessionController, :new
+    post "/session/new", SessionController, :new
 
   end
 
