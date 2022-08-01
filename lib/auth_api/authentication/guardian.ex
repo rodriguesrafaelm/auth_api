@@ -1,0 +1,16 @@
+defmodule AuthApi.Guardian  do
+  use Guardian, otp_app: :auth_api
+  alias AuthApi.Accounts
+
+  def subject_for_token(resource, _claims) do
+    sub = to_string(resource.id)
+    {:ok, sub}
+  end
+
+  def resources_from_claim(claims) do
+    id = claims["sub"]
+    resource = Accounts.get_by_id!(id)
+    {:ok, resource}
+  end
+
+end
