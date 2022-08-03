@@ -1,4 +1,4 @@
-defmodule AuthApi.Guardian  do
+defmodule AuthApi.Guardian do
   use Guardian, otp_app: :auth_api
   alias AuthApi.Accounts
 
@@ -7,7 +7,7 @@ defmodule AuthApi.Guardian  do
     {:ok, sub}
   end
 
-  def resources_from_claim(claims) do
+  def resource_from_claims(claims) do
     id = claims["sub"]
     resource = Accounts.get_by_id!(id)
     {:ok, resource}

@@ -4,7 +4,7 @@ defmodule AuthApi.Guardian.AuthPipeline do
 
   use Guardian.Plug.Pipeline,
     otp_app: :auth_api,
-    module: Authapi.Guardian,
+    module: AuthApi.Guardian,
     error_handler: AuthApi.Guardian.AuthErrorHandler
 
 
@@ -14,5 +14,5 @@ defmodule AuthApi.Guardian.AuthPipeline do
 
 
 
-  
+
 end
