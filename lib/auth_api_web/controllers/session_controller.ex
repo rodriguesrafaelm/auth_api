@@ -10,7 +10,7 @@ defmodule AuthApiWeb.SessionController do
     case Accounts.authenticate_user(email, password) do
       {:ok, user} ->
         {:ok, access_token, _claims} =
-          Guardian.encode_and_sign(user, %{}, token_type: "access", ttl: {15, :minutes})
+          Guardian.encode_and_sign(user, %{}, token_type: "access", ttl: {5, :minutes})
 
 
         {:ok, refresh_token, _claims} =
@@ -34,7 +34,7 @@ defmodule AuthApiWeb.SessionController do
       refresh_token =
         Plug.Conn.fetch_cookies(conn) |> Map.from_struct() |> get_in([:cookies, "ruid"])
 
-      case Guardian.exchange(refresh_token, "refresh", "access") do
+      case Guardian.exchange(refresh_token, "refresh", "access", ttl: {5, :minutes}) do
         {:ok, _old_stuff, {new_access_token, _new_claims}} ->
           conn
           |> put_status(:created)

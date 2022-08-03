@@ -41,4 +41,10 @@ defmodule AuthApi.Accounts do
     Pbkdf2.verify_pass(password, encypted_password)
   end
 
+  def listar_usuarios() do
+    query = from a in User, select: [:id, :first_name]
+    Repo.all(query)
+  end
+
+
 end

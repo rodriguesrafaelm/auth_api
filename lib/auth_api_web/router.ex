@@ -20,6 +20,7 @@ defmodule AuthApiWeb.Router do
   scope "/api", AuthApiWeb do
     pipe_through [:api, :auth]
 
+    get "/lista", UserController, :lista
     post "/session/refresh", SessionController, :refresh
     post "/session/delete", SessionController, :delete
 

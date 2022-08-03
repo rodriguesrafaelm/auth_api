@@ -3,6 +3,8 @@ defmodule AuthApiWeb.UserController do
 
   alias AuthApi.Accounts
   alias AuthApi.Accounts.User
+  alias AuthApi.Repo
+  import Ecto.Query
 
   action_fallback AuthApiWeb.FallbackController
 
@@ -13,6 +15,13 @@ defmodule AuthApiWeb.UserController do
       |> text("Usuário cadastrado com sucesso, usando o email:" <> " " <> user.email)
 
     end
+  end
+
+  def lista(conn, _params) do
+    users = Accounts.listar_usuarios
+    conn
+    |> put_status(:ok)
+    |> render("lista.json", %{users: users})
   end
 
 end

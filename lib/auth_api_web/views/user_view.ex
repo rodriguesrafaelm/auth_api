@@ -15,8 +15,19 @@ defmodule AuthApiWeb.UserView do
       id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
-      email: user.email,
-      password: user.password
+      email: user.email
     }
   end
+
+  def render("lista.json", %{users: users}) do
+    %{data: render_many(users, UserView, "usuarios.json")}
+  end
+
+  def render("usuarios.json", %{user: user}) do
+    %{
+      id: user.id,
+      first_name: user.first_name
+    }
+  end
+
 end
